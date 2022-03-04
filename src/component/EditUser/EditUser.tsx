@@ -8,6 +8,7 @@ import { IUser } from '../../types/IUser';
 type ParamsEditedItem = {
     id: string
 }
+
 const EditUser: FC = () => {
     const { id } = useParams<ParamsEditedItem>()
     const { editedUser,  saveEditedUser,  getUsers } = useAction()
@@ -23,7 +24,8 @@ const EditUser: FC = () => {
     useEffect(() => {
         editedUser(id)
     }, [id])
-
+   console.log(id);
+   
     const handleSubmit = () => {
         if(!values.lastName && !values.name && !values.phone){
             return
@@ -43,11 +45,11 @@ const EditUser: FC = () => {
         <>
         <div style={{display: "flex", justifyContent: "space-around", color: "black"}}>
         <Box style={{width: '450px',display: 'flex',alignItems: 'center', flexDirection: 'column',justifyContent: 'center', marginTop: '20px'}}>
-        <Typography variant='h4' >Add User</Typography>
+        <Typography variant='h4' >Edit User</Typography>
         <TextField style={{padding : '5px'}} variant='outlined' label='Name' value={values.name} onChange={e => setValues({...values, name:  e.target.value})} />
         <TextField style={{padding : '5px'}} variant='outlined' label='LastName' value={values.lastName} onChange={e => setValues({...values, lastName:   e.target.value})}  />
         <TextField style={{padding : '5px'}} variant='outlined' label='Number' value={values.phone} onChange={e => setValues({...values, phone:  +e.target.value})} />
-        <Button onClick={handleSubmit}>Sava </Button> 
+        <Button onClick={handleSubmit}>Save </Button> 
         </Box>
         </div>
         </> 

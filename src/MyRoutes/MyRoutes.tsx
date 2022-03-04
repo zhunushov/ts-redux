@@ -6,7 +6,7 @@ import ListUser from '../component/ListUser/ListUser';
 
 const MyRoutes = () => {
     return (
-        <Routes>sss
+        <Routes>
             <Route path='/add' element={<AddUser />} />
             <Route path='/' element={<ListUser /> } />
             <Route path='/edit/:id' element={<EditUser /> } />

@@ -4,12 +4,11 @@ import { Dispatch } from "redux"
 import axios from 'axios';
 import { IUser } from '../../types/IUser';
 
-export const addUser = (newUser: IUser) => {
+export const addUser = (newUser: IUser) => {    
     return async (dispatch : Dispatch<UserAction>) => {
         try {
+            await axios.post(API, newUser)
             dispatch({type: UserActionTypes.GET_USERS})
-             await axios.post(API, newUser)
-             getUsers()
         } catch (error: any) {
            dispatch({type: UserActionTypes.GET_USERS_ERROR, payload: error}) 
         }
@@ -26,10 +25,10 @@ export const getUsers = () => {
         }
     }
 }
-export const deleteUser = (id: number) => {
+export const deleteUser = (user: Record<string,any>) => {
     return async (dispatch: Dispatch<UserAction>) => {
         try {
-            await axios.delete(`${API}/${id}`)
+            await axios.delete(`${API}/${user._id}`)
             getUsers()
         } catch (error: any) {
             dispatch({type: UserActionTypes.GET_USERS_ERROR, payload: error})   
@@ -46,7 +45,7 @@ export const editedUser = (id: any) => {
         }
     }
 }
-export const saveEditedUser =  (id: any, editedUser: IUser) => {
+export const saveEditedUser =  (id: any, editedUser: IUser) => {    
     return async (dispatch: Dispatch<UserAction>) => {
     try {
         dispatch({type: UserActionTypes.GET_USERS})
